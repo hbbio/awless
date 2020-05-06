@@ -37,6 +37,7 @@ import (
 	"github.com/hbbio/awless/template/params"
 )
 
+// CreateAccesskey includes all parameters required to create an access key.
 type CreateAccesskey struct {
 	_      string `action:"create" entity:"accesskey" awsAPI:"iam" awsCall:"CreateAccessKey" awsInput:"iam.CreateAccessKeyInput" awsOutput:"iam.CreateAccessKeyOutput"`
 	logger *logger.Logger
@@ -58,9 +59,8 @@ func (cmd *CreateAccesskey) ParamsSpec() params.Spec {
 					return nil, fmt.Errorf("no-prompt: %s", err)
 				}
 				return map[string]interface{}{"save": !b}, nil
-			} else {
-				return nil, nil
 			}
+			return nil, nil
 		},
 		"no-prompt",
 	)
@@ -118,7 +118,7 @@ type DeleteAccesskey struct {
 	logger *logger.Logger
 	graph  cloud.GraphAPI
 	api    iamiface.IAMAPI
-	Id     *string `awsName:"AccessKeyId" awsType:"awsstr" templateName:"id"`
+	ID     *string `awsName:"AccessKeyId" awsType:"awsstr" templateName:"id"`
 	User   *string `awsName:"UserName" awsType:"awsstr" templateName:"user"`
 }
 

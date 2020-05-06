@@ -1,5 +1,6 @@
 package params
 
+// Reducer is a program which apply `reduceFunc` to values.
 type Reducer interface {
 	Keys() []string
 	Reduce(map[string]interface{}) (map[string]interface{}, error)

@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// Validate checks if `paramValues` match `all` Validators.
 func Validate(all Validators, paramValues map[string]interface{}) error {
 	msg := bytes.NewBufferString("param validation:")
 	var hasErr bool
@@ -26,10 +27,13 @@ func Validate(all Validators, paramValues map[string]interface{}) error {
 	return nil
 }
 
+// validatorFunc defines a validator function.
 type validatorFunc func(val interface{}, others map[string]interface{}) error
 
+// Validators are a map of validator functions.
 type Validators map[string]validatorFunc
 
+// IsInEnumIgnoreCase checks if value is in `items` (case insensitive).
 func IsInEnumIgnoreCase(items ...string) validatorFunc {
 	included := func(arr []string, s string) bool {
 		for _, a := range arr {
@@ -51,6 +55,7 @@ func IsInEnumIgnoreCase(items ...string) validatorFunc {
 	}
 }
 
+// MaxLengthOf checks if value length is less than `l`.
 func MaxLengthOf(l int) validatorFunc {
 	return func(i interface{}, others map[string]interface{}) error {
 		s, err := toString(i)
@@ -64,6 +69,7 @@ func MaxLengthOf(l int) validatorFunc {
 	}
 }
 
+// MinLengthOf checks if value length is at least `l`.
 func MinLengthOf(l int) validatorFunc {
 	return func(i interface{}, others map[string]interface{}) error {
 		s, err := toString(i)
@@ -77,6 +83,7 @@ func MinLengthOf(l int) validatorFunc {
 	}
 }
 
+// IsFilepath checks if value is a file path.
 func IsFilepath(i interface{}, others map[string]interface{}) error {
 	filepath, err := toString(i)
 	if err != nil {

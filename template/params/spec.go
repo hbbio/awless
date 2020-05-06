@@ -1,11 +1,13 @@
 package params
 
+// Spec specifies a set of transformations to parameters including Rules, Reducers and Validators.
 type Spec interface {
 	Rule() Rule
 	Reducers() []Reducer
 	Validators() Validators
 }
 
+// NewSpec creates a new Spec.
 func NewSpec(r Rule, vs ...Validators) Spec {
 	return newSpec(r, vs...)
 }

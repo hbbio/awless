@@ -61,7 +61,7 @@ type AttachElasticip struct {
 	logger             *logger.Logger
 	graph              cloud.GraphAPI
 	api                ec2iface.EC2API
-	Id                 *string `awsName:"AllocationId" awsType:"awsstr" templateName:"id"`
+	ID                 *string `awsName:"AllocationId" awsType:"awsstr" templateName:"id"`
 	Instance           *string `awsName:"InstanceId" awsType:"awsstr" templateName:"instance"`
 	Networkinterface   *string `awsName:"NetworkInterfaceId" awsType:"awsstr" templateName:"networkinterface"`
 	Privateip          *string `awsName:"PrivateIpAddress" awsType:"awsstr" templateName:"privateip"`
