@@ -1,6 +1,8 @@
 [![Build Status](https://api.travis-ci.org/hbbio/awless.svg?branch=master)](https://travis-ci.org/hbbio/awless)
 [![Go Report Card](https://goreportcard.com/badge/github.com/hbbio/awless)](https://goreportcard.com/report/github.com/hbbio/awless)
 
+_This repository is a fork of `wallix/awless`. I built `awless` with my former team at Wallix, and we're all saddened that the original repository is not maintained anymore since we all left. I don't claim I have time to actively maintain it, but I will definitely review pull requests, and try to keep up with Go and/or AWS changes since I use `awless` myself!_
+
 <img src="https://user-images.githubusercontent.com/808274/33351381-5b9a0d00-d458-11e7-91ed-cf7ada7237c1.png" alt="terminal icon" width="48"> `awless` is a powerful, innovative and small surface command line interface (CLI) to manage Amazon Web Services.
 
 [Twitter](http://twitter.com/awlessCLI) | [Wiki](https://github.com/hbbio/awless/wiki) | [Changelog](https://github.com/hbbio/awless/blob/master/CHANGELOG.md#readme)
@@ -35,7 +37,7 @@ If you have previously used the AWS CLI or aws-shell, you don't need to configur
 # Main features
 
 <p align="center">
-  <a href="https://raw.githubusercontent.com/wiki/hbbio/awless/apng/awless-demo.png"><img src="https://raw.githubusercontent.com/wiki/hbbio/awless/apng/awless-demo.png" alt="video of a few awless commands"></a>
+  <a href="https://raw.githubusercontent.com/wiki/wallix/awless/apng/awless-demo.png"><img src="https://raw.githubusercontent.com/wiki/hbbio/awless/apng/awless-demo.png" alt="video of a few awless commands"></a>
 <br/>
 <em>Note that the video above is in <a href="https://en.wikipedia.org/wiki/APNG">APNG</a> and requires a recent browser.</em>
 </p>
