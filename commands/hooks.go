@@ -24,13 +24,14 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws/credentials/stscreds"
 	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/config"
+	"github.com/hbbio/awless/database"
+	"github.com/hbbio/awless/logger"
+	"github.com/hbbio/awless/sync"
 	"github.com/spf13/cobra"
-	"github.com/wallix/awless/aws/services"
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/config"
-	"github.com/wallix/awless/database"
-	"github.com/wallix/awless/logger"
-	"github.com/wallix/awless/sync"
+
+	awsservices "github.com/hbbio/awless/aws/services"
 )
 
 func applyHooks(funcs ...func(*cobra.Command, []string) error) func(*cobra.Command, []string) {
@@ -192,7 +193,7 @@ func onVersionUpgrade(cmd *cobra.Command, args []string) error {
 		}
 		migrationActionsAndExtraMessages(config.Version)
 		logger.Infof("You have just upgraded awless from %s to %s", lastVersion, config.Version)
-		logger.Infof("Check out %s latest features at https://github.com/wallix/awless/blob/master/CHANGELOG.md", config.Version)
+		logger.Infof("Check out %s latest features at https://github.com/hbbio/awless/blob/master/CHANGELOG.md", config.Version)
 	}
 
 	return nil

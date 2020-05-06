@@ -25,12 +25,13 @@ import (
 	"strings"
 	"time"
 
+	awsservices "github.com/hbbio/awless/aws/services"
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/config"
+	"github.com/hbbio/awless/logger"
+	"github.com/hbbio/awless/sync"
+
 	"github.com/spf13/cobra"
-	"github.com/wallix/awless/aws/services"
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/config"
-	"github.com/wallix/awless/logger"
-	"github.com/wallix/awless/sync"
 )
 
 var (

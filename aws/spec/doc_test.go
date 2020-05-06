@@ -3,8 +3,8 @@ package awsspec
 import (
 	"testing"
 
-	"github.com/wallix/awless/aws/doc"
-	"github.com/wallix/awless/template/params"
+	awsdoc "github.com/hbbio/awless/aws/doc"
+	"github.com/hbbio/awless/template/params"
 )
 
 func TestDocForEachCommand(t *testing.T) {

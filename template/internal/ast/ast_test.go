@@ -20,8 +20,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/wallix/awless/template/env"
-	"github.com/wallix/awless/template/params"
+	"github.com/hbbio/awless/template/env"
+	"github.com/hbbio/awless/template/params"
 )
 
 func TestCloneAST(t *testing.T) {

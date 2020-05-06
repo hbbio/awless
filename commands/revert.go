@@ -22,11 +22,11 @@ import (
 
 	"os"
 
+	"github.com/hbbio/awless/config"
+	"github.com/hbbio/awless/database"
+	"github.com/hbbio/awless/logger"
+	"github.com/hbbio/awless/template"
 	"github.com/spf13/cobra"
-	"github.com/wallix/awless/config"
-	"github.com/wallix/awless/database"
-	"github.com/wallix/awless/logger"
-	"github.com/wallix/awless/template"
 )
 
 func init() {

@@ -6,9 +6,9 @@ import (
 
 	"sort"
 
-	p "github.com/wallix/awless/cloud/properties"
-	"github.com/wallix/awless/graph"
-	"github.com/wallix/awless/graph/resourcetest"
+	p "github.com/hbbio/awless/cloud/properties"
+	"github.com/hbbio/awless/graph"
+	"github.com/hbbio/awless/graph/resourcetest"
 )
 
 func TestEnumCompletionFunc(t *testing.T) {

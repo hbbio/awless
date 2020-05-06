@@ -21,7 +21,7 @@ import (
 	"io"
 	"text/tabwriter"
 
-	"github.com/wallix/awless/cloud"
+	"github.com/hbbio/awless/cloud"
 )
 
 type BucketSizer struct {

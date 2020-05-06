@@ -17,10 +17,10 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/wallix/awless/logger"
-
 	gossh "golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/knownhosts"
+
+	"github.com/hbbio/awless/logger"
 )
 
 type Client struct {
@@ -122,12 +122,12 @@ func (c *Client) NewClientWithProxy(destinationHost string, destinationPort int,
 		c.logger.ExtraVerbosef("proxied successfully with user %s", user)
 
 		return &Client{
-			Client:  gossh.NewClient(conn, chans, reqs),
-			Proxy:   c,
-			IP:      destinationHost,
-			User:    user,
-			Keypath: c.Keypath,
-			Port:    destinationPort,
+			Client:                  gossh.NewClient(conn, chans, reqs),
+			Proxy:                   c,
+			IP:                      destinationHost,
+			User:                    user,
+			Keypath:                 c.Keypath,
+			Port:                    destinationPort,
 			InteractiveTerminalFunc: func(*gossh.Client) error { return nil },
 			StrictHostKeyChecking:   c.StrictHostKeyChecking,
 			logger:                  logger.DiscardLogger,

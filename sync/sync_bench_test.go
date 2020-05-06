@@ -23,8 +23,9 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3iface"
 	"github.com/aws/aws-sdk-go/service/sts/stsiface"
-	"github.com/wallix/awless/aws/services"
-	"github.com/wallix/awless/sync"
+
+	awsservices "github.com/hbbio/awless/aws/services"
+	"github.com/hbbio/awless/sync"
 )
 
 func BenchmarkSync(b *testing.B) {

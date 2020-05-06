@@ -27,16 +27,16 @@ import (
 	"sync"
 	"time"
 
+	awsservices "github.com/hbbio/awless/aws/services"
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/cloud/match"
+	"github.com/hbbio/awless/cloud/properties"
+	"github.com/hbbio/awless/config"
+	"github.com/hbbio/awless/console"
+	"github.com/hbbio/awless/graph"
+	"github.com/hbbio/awless/logger"
+	"github.com/hbbio/awless/ssh"
 	"github.com/spf13/cobra"
-	"github.com/wallix/awless/aws/services"
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/cloud/match"
-	"github.com/wallix/awless/cloud/properties"
-	"github.com/wallix/awless/config"
-	"github.com/wallix/awless/console"
-	"github.com/wallix/awless/graph"
-	"github.com/wallix/awless/logger"
-	"github.com/wallix/awless/ssh"
 )
 
 var keyPathFlag, proxyInstanceThroughFlag string

@@ -24,18 +24,18 @@ import (
 	"strings"
 	"time"
 
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/template/env"
-	"github.com/wallix/awless/template/params"
-
 	"github.com/aws/aws-sdk-go/service/iam"
 	"github.com/aws/aws-sdk-go/service/iam/iamiface"
 	"github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/qr"
 	"github.com/chzyer/readline"
 	"github.com/fatih/color"
-	"github.com/wallix/awless/aws/config"
-	"github.com/wallix/awless/logger"
+
+	awsconfig "github.com/hbbio/awless/aws/config"
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/logger"
+	"github.com/hbbio/awless/template/env"
+	"github.com/hbbio/awless/template/params"
 )
 
 type CreateMfadevice struct {

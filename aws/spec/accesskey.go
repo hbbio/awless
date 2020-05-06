@@ -23,18 +23,18 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/wallix/awless/cloud/match"
-	"github.com/wallix/awless/template/env"
-	"github.com/wallix/awless/template/params"
-
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/service/iam"
 	"github.com/aws/aws-sdk-go/service/iam/iamiface"
-	"github.com/wallix/awless/aws/config"
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/cloud/properties"
-	"github.com/wallix/awless/logger"
+
+	awsconfig "github.com/hbbio/awless/aws/config"
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/cloud/match"
+	"github.com/hbbio/awless/cloud/properties"
+	"github.com/hbbio/awless/logger"
+	"github.com/hbbio/awless/template/env"
+	"github.com/hbbio/awless/template/params"
 )
 
 type CreateAccesskey struct {

@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/hbbio/awless/config"
 	"github.com/spf13/cobra"
-	"github.com/wallix/awless/config"
 )
 
 var keysOnly bool

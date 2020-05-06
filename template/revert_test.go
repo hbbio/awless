@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/wallix/awless/aws/spec"
-	"github.com/wallix/awless/template/internal/ast"
+	awsspec "github.com/hbbio/awless/aws/spec"
+	"github.com/hbbio/awless/template/internal/ast"
 )
 
 func TestRevertOneliner(t *testing.T) {

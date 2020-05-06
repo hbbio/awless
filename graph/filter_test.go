@@ -3,9 +3,9 @@ package graph_test
 import (
 	"testing"
 
-	"github.com/wallix/awless/cloud/properties"
-	"github.com/wallix/awless/graph"
-	"github.com/wallix/awless/graph/resourcetest"
+	"github.com/hbbio/awless/cloud/properties"
+	"github.com/hbbio/awless/graph"
+	"github.com/hbbio/awless/graph/resourcetest"
 )
 
 func TestFilterGraph(t *testing.T) {

@@ -11,7 +11,8 @@ import (
 	"github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/aws/aws-sdk-go/service/configservice"
 	"github.com/fatih/color"
-	"github.com/wallix/awless/aws/services"
+
+	awsservices "github.com/hbbio/awless/aws/services"
 )
 
 const (

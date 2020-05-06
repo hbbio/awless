@@ -21,12 +21,12 @@ import (
 	"os"
 	"strings"
 
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/config"
+	"github.com/hbbio/awless/inspect"
+	"github.com/hbbio/awless/logger"
+	"github.com/hbbio/awless/sync"
 	"github.com/spf13/cobra"
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/config"
-	"github.com/wallix/awless/inspect"
-	"github.com/wallix/awless/logger"
-	"github.com/wallix/awless/sync"
 )
 
 var (

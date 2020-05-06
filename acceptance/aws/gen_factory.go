@@ -36,9 +36,10 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3/s3iface"
 	"github.com/aws/aws-sdk-go/service/sns/snsiface"
 	"github.com/aws/aws-sdk-go/service/sqs/sqsiface"
-	"github.com/wallix/awless/aws/spec"
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/logger"
+
+	awsspec "github.com/hbbio/awless/aws/spec"
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/logger"
 )
 
 type AcceptanceFactory struct {

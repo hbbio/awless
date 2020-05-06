@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/hbbio/awless/cloud"
 	"github.com/olekukonko/tablewriter"
-	"github.com/wallix/awless/cloud"
 )
 
 type tableResourceDisplayer struct {

@@ -22,10 +22,11 @@ import (
 	"os"
 	"strings"
 
+	awsspec "github.com/hbbio/awless/aws/spec"
+	"github.com/hbbio/awless/config"
+	"github.com/hbbio/awless/logger"
+
 	"github.com/spf13/cobra"
-	"github.com/wallix/awless/aws/spec"
-	"github.com/wallix/awless/config"
-	"github.com/wallix/awless/logger"
 )
 
 var (

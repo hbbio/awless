@@ -1,14 +1,13 @@
 package awsat
 
 import (
+	"os"
+	"path/filepath"
 	"testing"
 
-	"os"
-
-	"path/filepath"
-
 	"github.com/aws/aws-sdk-go/service/s3"
-	"github.com/wallix/awless/aws/spec"
+
+	awsspec "github.com/hbbio/awless/aws/spec"
 )
 
 func TestS3object(t *testing.T) {

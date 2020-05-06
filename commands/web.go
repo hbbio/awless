@@ -19,9 +19,9 @@ package commands
 import (
 	"strings"
 
+	"github.com/hbbio/awless/config"
+	"github.com/hbbio/awless/web"
 	"github.com/spf13/cobra"
-	"github.com/wallix/awless/config"
-	"github.com/wallix/awless/web"
 )
 
 var (

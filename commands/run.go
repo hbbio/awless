@@ -1,19 +1,3 @@
-/*
-Copyright 2017 WALLIX
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-uimitations under the License.
-*/
-
 package commands
 
 import (
@@ -36,19 +20,20 @@ import (
 	"time"
 
 	"github.com/chzyer/readline"
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/cloud/match"
+	"github.com/hbbio/awless/cloud/properties"
+	"github.com/hbbio/awless/config"
+	"github.com/hbbio/awless/logger"
+	"github.com/hbbio/awless/sync"
+	"github.com/hbbio/awless/template"
+	"github.com/hbbio/awless/template/params"
 	"github.com/spf13/cobra"
 	"github.com/wallix/awless-scheduler/client"
-	"github.com/wallix/awless/aws/doc"
-	"github.com/wallix/awless/aws/services"
-	"github.com/wallix/awless/aws/spec"
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/cloud/match"
-	"github.com/wallix/awless/cloud/properties"
-	"github.com/wallix/awless/config"
-	"github.com/wallix/awless/logger"
-	"github.com/wallix/awless/sync"
-	"github.com/wallix/awless/template"
-	"github.com/wallix/awless/template/params"
+
+	awsdoc "github.com/hbbio/awless/aws/doc"
+	awsservices "github.com/hbbio/awless/aws/services"
+	awsspec "github.com/hbbio/awless/aws/spec"
 )
 
 var (

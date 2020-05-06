@@ -20,9 +20,9 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/hbbio/awless/database"
+	"github.com/hbbio/awless/logger"
 	"github.com/spf13/cobra"
-	"github.com/wallix/awless/database"
-	"github.com/wallix/awless/logger"
 )
 
 var (

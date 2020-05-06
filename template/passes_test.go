@@ -7,10 +7,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/wallix/awless/aws/spec"
-	"github.com/wallix/awless/template/env"
-	"github.com/wallix/awless/template/internal/ast"
-	"github.com/wallix/awless/template/params"
+	awsspec "github.com/hbbio/awless/aws/spec"
+	"github.com/hbbio/awless/template/env"
+	"github.com/hbbio/awless/template/internal/ast"
+	"github.com/hbbio/awless/template/params"
 )
 
 func TestCommandsPasses(t *testing.T) {

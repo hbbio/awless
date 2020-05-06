@@ -20,16 +20,16 @@ import (
 	"strings"
 	"time"
 
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/template/env"
-	"github.com/wallix/awless/template/params"
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/template/env"
+	"github.com/hbbio/awless/template/params"
 
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/client"
 	"github.com/aws/aws-sdk-go/aws/request"
 	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/aws/aws-sdk-go/service/ec2/ec2iface"
-	"github.com/wallix/awless/logger"
+	"github.com/hbbio/awless/logger"
 )
 
 type CreateTag struct {

@@ -25,9 +25,10 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws/awserr"
+	awsservices "github.com/hbbio/awless/aws/services"
+	"github.com/hbbio/awless/logger"
+
 	"github.com/spf13/cobra"
-	"github.com/wallix/awless/aws/services"
-	"github.com/wallix/awless/logger"
 )
 
 var onlyMyIPFlag, onlyMyNameFlag, onlyMyTypeFlag, onlyMyIDFlag, onlyMyAccountFlag, onlyMyResourcePathFlag bool

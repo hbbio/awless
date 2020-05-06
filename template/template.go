@@ -23,9 +23,9 @@ import (
 	"time"
 
 	"github.com/fatih/color"
+	"github.com/hbbio/awless/template/env"
+	"github.com/hbbio/awless/template/internal/ast"
 	"github.com/oklog/ulid"
-	"github.com/wallix/awless/template/env"
-	"github.com/wallix/awless/template/internal/ast"
 )
 
 type Template struct {

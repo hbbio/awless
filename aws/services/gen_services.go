@@ -66,11 +66,11 @@ import (
 	"github.com/aws/aws-sdk-go/service/sqs/sqsiface"
 	"github.com/aws/aws-sdk-go/service/sts"
 	"github.com/aws/aws-sdk-go/service/sts/stsiface"
-	"github.com/wallix/awless/aws/fetch"
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/fetch"
-	"github.com/wallix/awless/graph"
-	"github.com/wallix/awless/logger"
+	"github.com/hbbio/awless/aws/fetch"
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/fetch"
+	"github.com/hbbio/awless/graph"
+	"github.com/hbbio/awless/logger"
 	tstore "github.com/wallix/triplestore"
 )
 
@@ -141,25 +141,25 @@ var ResourceTypes = []string{
 }
 
 var ServicePerAPI = map[string]string{
-	"ec2":         "infra",
-	"elbv2":       "infra",
-	"elb":         "infra",
-	"rds":         "infra",
-	"autoscaling": "infra",
-	"ecr":         "infra",
-	"ecs":         "infra",
+	"ec2":                    "infra",
+	"elbv2":                  "infra",
+	"elb":                    "infra",
+	"rds":                    "infra",
+	"autoscaling":            "infra",
+	"ecr":                    "infra",
+	"ecs":                    "infra",
 	"applicationautoscaling": "infra",
-	"acm":            "infra",
-	"iam":            "access",
-	"sts":            "access",
-	"s3":             "storage",
-	"sns":            "messaging",
-	"sqs":            "messaging",
-	"route53":        "dns",
-	"lambda":         "lambda",
-	"cloudwatch":     "monitoring",
-	"cloudfront":     "cdn",
-	"cloudformation": "cloudformation",
+	"acm":                    "infra",
+	"iam":                    "access",
+	"sts":                    "access",
+	"s3":                     "storage",
+	"sns":                    "messaging",
+	"sqs":                    "messaging",
+	"route53":                "dns",
+	"lambda":                 "lambda",
+	"cloudwatch":             "monitoring",
+	"cloudfront":             "cdn",
+	"cloudformation":         "cloudformation",
 }
 
 var ServicePerResourceType = map[string]string{
@@ -309,20 +309,20 @@ func NewInfra(sess *session.Session, profile string, extraConf map[string]interf
 	fetchConfig.Log = log
 
 	return &Infra{
-		EC2API:         ec2API,
-		ELBV2API:       elbv2API,
-		ELBAPI:         elbAPI,
-		RDSAPI:         rdsAPI,
-		AutoScalingAPI: autoscalingAPI,
-		ECRAPI:         ecrAPI,
-		ECSAPI:         ecsAPI,
+		EC2API:                    ec2API,
+		ELBV2API:                  elbv2API,
+		ELBAPI:                    elbAPI,
+		RDSAPI:                    rdsAPI,
+		AutoScalingAPI:            autoscalingAPI,
+		ECRAPI:                    ecrAPI,
+		ECSAPI:                    ecsAPI,
 		ApplicationAutoScalingAPI: applicationautoscalingAPI,
-		ACMAPI:  acmAPI,
-		fetcher: fetch.NewFetcher(awsfetch.BuildInfraFetchFuncs(fetchConfig)),
-		config:  extraConf,
-		region:  region,
-		profile: profile,
-		log:     log,
+		ACMAPI:                    acmAPI,
+		fetcher:                   fetch.NewFetcher(awsfetch.BuildInfraFetchFuncs(fetchConfig)),
+		config:                    extraConf,
+		region:                    region,
+		profile:                   profile,
+		log:                       log,
 	}
 }
 

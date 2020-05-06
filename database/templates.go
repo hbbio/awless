@@ -20,7 +20,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/wallix/awless/template"
+	"github.com/hbbio/awless/template"
 
 	"github.com/boltdb/bolt"
 )

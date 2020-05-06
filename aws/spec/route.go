@@ -16,11 +16,11 @@ limitations under the License.
 package awsspec
 
 import (
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/template/params"
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/template/params"
 
 	"github.com/aws/aws-sdk-go/service/ec2/ec2iface"
-	"github.com/wallix/awless/logger"
+	"github.com/hbbio/awless/logger"
 )
 
 type CreateRoute struct {

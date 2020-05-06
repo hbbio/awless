@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/wallix/awless/logger"
-	"github.com/wallix/awless/template/env"
+	"github.com/hbbio/awless/logger"
+	"github.com/hbbio/awless/template/env"
 )
 
 type Runner struct {

@@ -21,7 +21,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/wallix/awless/cloud"
+	"github.com/hbbio/awless/cloud"
 )
 
 type and struct {
@@ -131,7 +131,7 @@ func (m tagMatcher) Match(r cloud.Resource) bool {
 }
 
 func Tag(key, val string) tagMatcher {
-	tagQuoteRegexp := "^" + regexp.QuoteMeta(key + "=" + val) + "$"
+	tagQuoteRegexp := "^" + regexp.QuoteMeta(key+"="+val) + "$"
 	tagWildcardRegexp := regexp.MustCompile(strings.Replace(tagQuoteRegexp, "\\*", ".*", -1))
 
 	return tagMatcher{tagRegexp: tagWildcardRegexp}

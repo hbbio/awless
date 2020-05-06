@@ -19,16 +19,16 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/cloud/match"
-	"github.com/wallix/awless/cloud/properties"
-	"github.com/wallix/awless/cloud/rdf"
-	"github.com/wallix/awless/template/env"
-	"github.com/wallix/awless/template/params"
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/cloud/match"
+	"github.com/hbbio/awless/cloud/properties"
+	"github.com/hbbio/awless/cloud/rdf"
+	"github.com/hbbio/awless/template/env"
+	"github.com/hbbio/awless/template/params"
 
 	"github.com/aws/aws-sdk-go/service/route53"
 	"github.com/aws/aws-sdk-go/service/route53/route53iface"
-	"github.com/wallix/awless/logger"
+	"github.com/hbbio/awless/logger"
 )
 
 type CreateRecord struct {

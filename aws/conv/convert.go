@@ -46,9 +46,9 @@ import (
 	"github.com/aws/aws-sdk-go/service/route53"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/sns"
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/cloud/properties"
-	"github.com/wallix/awless/graph"
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/cloud/properties"
+	"github.com/hbbio/awless/graph"
 )
 
 func InitResource(source interface{}) (*graph.Resource, error) {

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/wallix/awless/cloud/properties"
-	"github.com/wallix/awless/graph"
+	"github.com/hbbio/awless/cloud/properties"
+	"github.com/hbbio/awless/graph"
 )
 
 type rBuilder struct {

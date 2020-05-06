@@ -29,10 +29,11 @@ import (
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/aws/aws-sdk-go/service/elbv2"
 	"github.com/aws/aws-sdk-go/service/iam"
-	"github.com/wallix/awless/aws/conv"
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/graph"
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/graph"
 	tstore "github.com/wallix/triplestore"
+
+	awsconv "github.com/hbbio/awless/aws/conv"
 )
 
 const (

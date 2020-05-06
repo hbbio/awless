@@ -24,9 +24,9 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/cloud/properties"
-	"github.com/wallix/awless/cloud/rdf"
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/cloud/properties"
+	"github.com/hbbio/awless/cloud/rdf"
 	tstore "github.com/wallix/triplestore"
 )
 

@@ -3,7 +3,7 @@ package parsing
 import (
 	"fmt"
 
-	"github.com/wallix/awless/template"
+	"github.com/hbbio/awless/template"
 )
 
 func Fuzz(data []byte) int {

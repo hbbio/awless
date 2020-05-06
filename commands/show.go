@@ -25,15 +25,15 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
+	"github.com/hbbio/awless/aws/config"
+	"github.com/hbbio/awless/cloud"
+	"github.com/hbbio/awless/cloud/properties"
+	"github.com/hbbio/awless/cloud/rdf"
+	"github.com/hbbio/awless/config"
+	"github.com/hbbio/awless/console"
+	"github.com/hbbio/awless/logger"
+	"github.com/hbbio/awless/sync"
 	"github.com/spf13/cobra"
-	"github.com/wallix/awless/aws/config"
-	"github.com/wallix/awless/cloud"
-	"github.com/wallix/awless/cloud/properties"
-	"github.com/wallix/awless/cloud/rdf"
-	"github.com/wallix/awless/config"
-	"github.com/wallix/awless/console"
-	"github.com/wallix/awless/logger"
-	"github.com/wallix/awless/sync"
 )
 
 var (
