@@ -11,9 +11,9 @@ import (
 	"github.com/oklog/ulid"
 )
 
-// Allow template executions serialization with context for JSON storage
+// Execution allows template execution serialization with context for JSON storage
 // without altering the template.Template model
-type TemplateExecution struct {
+type Execution struct {
 	*Template
 	Author, Source, Locale string
 	Profile, Path, Message string
@@ -21,7 +21,7 @@ type TemplateExecution struct {
 }
 
 // Date extract the date from the ulid template identifier
-func (t *TemplateExecution) Date() time.Time {
+func (t *Execution) Date() time.Time {
 	parsed, err := ulid.Parse(t.ID)
 	if err != nil {
 		panic(err)
@@ -29,7 +29,7 @@ func (t *TemplateExecution) Date() time.Time {
 	return time.Unix(int64(parsed.Time())/int64(1000), time.Nanosecond.Nanoseconds())
 }
 
-func (t *TemplateExecution) IsOneLiner() bool {
+func (t *Execution) IsOneLiner() bool {
 	var count int
 	for range t.CommandNodesIterator() {
 		count++
@@ -40,7 +40,7 @@ func (t *TemplateExecution) IsOneLiner() bool {
 const maxMsgLen = 140
 
 // SetMessage set the value of Message, truncating it if exceeds max len
-func (t *TemplateExecution) SetMessage(s string) {
+func (t *Execution) SetMessage(s string) {
 	out := strings.TrimSpace(s)
 	if len(out) > maxMsgLen {
 		out = out[:maxMsgLen-3] + "..."
@@ -48,7 +48,7 @@ func (t *TemplateExecution) SetMessage(s string) {
 	t.Message = out
 }
 
-func (t *TemplateExecution) MarshalJSON() ([]byte, error) {
+func (t *Execution) MarshalJSON() ([]byte, error) {
 	out := &toJSON{}
 	out.ID = t.ID
 	out.Author = t.Author
@@ -80,9 +80,9 @@ func (t *TemplateExecution) MarshalJSON() ([]byte, error) {
 	return json.MarshalIndent(out, "", " ")
 }
 
-func (t *TemplateExecution) UnmarshalJSON(b []byte) error {
+func (t *Execution) UnmarshalJSON(b []byte) error {
 	if t == nil {
-		t = new(TemplateExecution)
+		t = new(Execution)
 	}
 
 	if t.Template == nil {
@@ -131,18 +131,19 @@ func (t *TemplateExecution) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
-type TemplateExecutionStats struct {
+// ExecutionStats holds template execution statistics.
+type ExecutionStats struct {
 	KOCount, OKCount, CmdCount int
 	ActionEntityCount          map[string]int
 	Oneliner                   string
 }
 
-func (te *TemplateExecutionStats) AllKO() bool {
+func (te *ExecutionStats) AllKO() bool {
 	return te.KOCount == te.CmdCount
 }
 
-func (t *TemplateExecution) Stats() *TemplateExecutionStats {
-	stats := &TemplateExecutionStats{ActionEntityCount: make(map[string]int)}
+func (t *Execution) Stats() *ExecutionStats {
+	stats := &ExecutionStats{ActionEntityCount: make(map[string]int)}
 
 	var actionentity string
 	for _, cmd := range t.CommandNodesIterator() {

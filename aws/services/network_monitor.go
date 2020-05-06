@@ -13,7 +13,9 @@ import (
 	"github.com/hbbio/awless/console"
 )
 
-var DefaultNetworkMonitor = &NetworkMonitor{requests: make(map[*request.Request]*req)}
+var DefaultNetworkMonitor = &NetworkMonitor{
+	requests: make(map[*request.Request]*req),
+}
 
 type NetworkMonitor struct {
 	requests map[*request.Request]*req

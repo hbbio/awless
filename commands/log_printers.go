@@ -13,14 +13,14 @@ import (
 )
 
 type logPrinter interface {
-	print(*template.TemplateExecution) error
+	print(*template.Execution) error
 }
 
 type fullLogPrinter struct {
 	w io.Writer
 }
 
-func (p *fullLogPrinter) print(t *template.TemplateExecution) error {
+func (p *fullLogPrinter) print(t *template.Execution) error {
 	writeMultilineLogHeader(t, p.w)
 
 	if t.Message != "" {
@@ -52,7 +52,7 @@ type statLogPrinter struct {
 	w io.Writer
 }
 
-func (p *statLogPrinter) print(t *template.TemplateExecution) error {
+func (p *statLogPrinter) print(t *template.Execution) error {
 	writeLogHeader(t, p.w)
 
 	if t.Message != "" {
@@ -66,7 +66,7 @@ type shortLogPrinter struct {
 	w io.Writer
 }
 
-func (p *shortLogPrinter) print(t *template.TemplateExecution) error {
+func (p *shortLogPrinter) print(t *template.Execution) error {
 	writeLogHeader(t, p.w)
 	return nil
 }
@@ -75,7 +75,7 @@ type rawJSONPrinter struct {
 	w io.Writer
 }
 
-func (p *rawJSONPrinter) print(t *template.TemplateExecution) error {
+func (p *rawJSONPrinter) print(t *template.Execution) error {
 	if err := json.NewEncoder(p.w).Encode(t); err != nil {
 		return fmt.Errorf("json printer: %s", err)
 	}
@@ -86,12 +86,12 @@ type idOnlyPrinter struct {
 	w io.Writer
 }
 
-func (p *idOnlyPrinter) print(t *template.TemplateExecution) error {
+func (p *idOnlyPrinter) print(t *template.Execution) error {
 	fmt.Fprint(p.w, t.ID)
 	return nil
 }
 
-func writeLogHeader(t *template.TemplateExecution, w io.Writer) {
+func writeLogHeader(t *template.Execution, w io.Writer) {
 	stats := t.Stats()
 
 	fmt.Fprint(w, renderYellowFn(t.ID))
@@ -117,7 +117,7 @@ func writeLogHeader(t *template.TemplateExecution, w io.Writer) {
 	}
 }
 
-func writeMultilineLogHeader(t *template.TemplateExecution, w io.Writer) {
+func writeMultilineLogHeader(t *template.Execution, w io.Writer) {
 	color.New(color.FgYellow).Fprintf(w, "id %s", t.ID)
 	if !template.IsRevertible(t.Template) {
 		fmt.Fprintln(w, " (not revertible)")

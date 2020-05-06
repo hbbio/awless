@@ -1,19 +1,3 @@
-/*
-Copyright 2017 WALLIX
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
 package graph
 
 import (
@@ -223,9 +207,9 @@ func (res *Resource) marshalFullRDF() ([]tstore.Triple, error) {
 					return triples, fmt.Errorf("resource %s: marshalling property '%s': expected a route slice, got a %T", res, key, value)
 				}
 				for _, r := range list {
-					routeId := randomRdfId()
-					triples = append(triples, tstore.SubjPred(res.id, propId).Resource(routeId))
-					triples = append(triples, r.marshalToTriples(routeId)...)
+					routeID := randomRdfId()
+					triples = append(triples, tstore.SubjPred(res.id, propId).Resource(routeID))
+					triples = append(triples, r.marshalToTriples(routeID)...)
 				}
 			case rdf.Grant:
 				list, ok := value.([]*Grant)
@@ -233,9 +217,9 @@ func (res *Resource) marshalFullRDF() ([]tstore.Triple, error) {
 					return triples, fmt.Errorf("resource %s: marshalling property '%s': expected a grant slice, got a %T", res, key, value)
 				}
 				for _, g := range list {
-					grantId := randomRdfId()
-					triples = append(triples, tstore.SubjPred(res.id, propId).Resource(grantId))
-					triples = append(triples, g.marshalToTriples(grantId)...)
+					grantID := randomRdfId()
+					triples = append(triples, tstore.SubjPred(res.id, propId).Resource(grantID))
+					triples = append(triples, g.marshalToTriples(grantID)...)
 				}
 			case rdf.KeyValue:
 				list, ok := value.([]*KeyValue)
@@ -243,9 +227,9 @@ func (res *Resource) marshalFullRDF() ([]tstore.Triple, error) {
 					return triples, fmt.Errorf("resource %s: marshalling property '%s': expected a keyvalue slice, got a %T", res, key, value)
 				}
 				for _, kv := range list {
-					keyValId := randomRdfId()
-					triples = append(triples, tstore.SubjPred(res.id, propId).Resource(keyValId))
-					triples = append(triples, kv.marshalToTriples(keyValId)...)
+					keyValID := randomRdfId()
+					triples = append(triples, tstore.SubjPred(res.id, propId).Resource(keyValID))
+					triples = append(triples, kv.marshalToTriples(keyValID)...)
 				}
 			case rdf.DistributionOrigin:
 				list, ok := value.([]*DistributionOrigin)
@@ -253,9 +237,9 @@ func (res *Resource) marshalFullRDF() ([]tstore.Triple, error) {
 					return triples, fmt.Errorf("resource %s: marshalling property '%s': expected a distribution origin slice, got a %T", res, key, value)
 				}
 				for _, o := range list {
-					keyValId := randomRdfId()
-					triples = append(triples, tstore.SubjPred(res.id, propId).Resource(keyValId))
-					triples = append(triples, o.marshalToTriples(keyValId)...)
+					keyValID := randomRdfId()
+					triples = append(triples, tstore.SubjPred(res.id, propId).Resource(keyValID))
+					triples = append(triples, o.marshalToTriples(keyValID)...)
 				}
 			case rdf.Grant:
 			default:

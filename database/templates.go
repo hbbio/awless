@@ -27,7 +27,7 @@ import (
 
 const TEMPLATES_BUCKET = "templates"
 
-func (db *DB) AddTemplate(tplExec *template.TemplateExecution) error {
+func (db *DB) AddTemplate(tplExec *template.Execution) error {
 	return db.bolt.Update(func(tx *bolt.Tx) error {
 		if tplExec.ID == "" {
 			return errors.New("cannot persist template with empty ID")
@@ -47,8 +47,8 @@ func (db *DB) AddTemplate(tplExec *template.TemplateExecution) error {
 	})
 }
 
-func (db *DB) GetTemplate(id string) (*template.TemplateExecution, error) {
-	tplExec := &template.TemplateExecution{}
+func (db *DB) GetTemplate(id string) (*template.Execution, error) {
+	tplExec := &template.Execution{}
 
 	err := db.bolt.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(TEMPLATES_BUCKET))
@@ -87,7 +87,7 @@ func (db *DB) DeleteTemplate(id string) error {
 
 type LoadedTemplate struct {
 	Err      error
-	TplExec  *template.TemplateExecution
+	TplExec  *template.Execution
 	Key, Raw string
 }
 
@@ -100,7 +100,7 @@ func (db *DB) GetLoadedTemplate(id string) (*LoadedTemplate, error) {
 			return errors.New("no templates stored yet")
 		}
 		if content := b.Get([]byte(id)); content != nil {
-			tplExec := &template.TemplateExecution{}
+			tplExec := &template.Execution{}
 			terr := tplExec.UnmarshalJSON(content)
 			loadedTpl.TplExec = tplExec
 			loadedTpl.Err = terr
@@ -126,7 +126,7 @@ func (db *DB) ListTemplates() ([]*LoadedTemplate, error) {
 		c := b.Cursor()
 
 		for k, v := c.First(); k != nil; k, v = c.Next() {
-			tplExec := &template.TemplateExecution{}
+			tplExec := &template.Execution{}
 			terr := tplExec.UnmarshalJSON(v)
 			lt := &LoadedTemplate{TplExec: tplExec, Err: terr, Key: string(k), Raw: string(v)}
 			results = append(results, lt)

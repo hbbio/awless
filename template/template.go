@@ -28,16 +28,18 @@ import (
 	"github.com/oklog/ulid"
 )
 
+// Template is an awless template definition.
 type Template struct {
 	ID string
 	*ast.AST
 }
 
-func (s *Template) DryRun(renv env.Running) (tpl *Template, err error) {
+// DryRun performs a template dry run.
+func (t *Template) DryRun(renv env.Running) (tpl *Template, err error) {
 	renv.SetDryRun(true)
 	defer renv.SetDryRun(false)
 
-	tpl, err = s.Run(renv)
+	tpl, err = t.Run(renv)
 	if err != nil {
 		return
 	}
@@ -122,9 +124,9 @@ func prefixError(err error, prefix string) error {
 	return fmt.Errorf("%s: %s", prefix, err.Error())
 }
 
-func (s *Template) Validate(rules ...Validator) (all []error) {
+func (t *Template) Validate(rules ...Validator) (all []error) {
 	for _, rule := range rules {
-		errs := rule.Execute(s)
+		errs := rule.Execute(t)
 		all = append(all, errs...)
 	}
 

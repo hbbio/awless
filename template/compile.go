@@ -10,9 +10,11 @@ import (
 	"github.com/hbbio/awless/template/params"
 )
 
+// Mode defines a list of template compiler passes.
 type Mode []compileFunc
 
 var (
+	// TestCompileMode is a standard template compilation Mode.
 	TestCompileMode = []compileFunc{
 		injectCommandsInNodesPass,
 		failOnDeclarationWithNoResultPass,
@@ -26,10 +28,12 @@ var (
 		resolveParamsAndExtractRefsPass,
 	}
 
+	// PreRevertCompileMode is a compilation Mode for reverting templates.
 	PreRevertCompileMode = []compileFunc{
 		resolveParamsAndExtractRefsPass,
 	}
 
+	// NewRunnerCompileMode is a compilation Mode for new runners.
 	NewRunnerCompileMode = []compileFunc{
 		injectCommandsInNodesPass,
 		failOnDeclarationWithNoResultPass,
@@ -48,6 +52,7 @@ var (
 	}
 )
 
+// Compile a Template.
 func Compile(tpl *Template, cenv env.Compiling, mode ...Mode) (*Template, env.Compiling, error) {
 	var pass *multiPass
 
@@ -296,12 +301,11 @@ func resolveMissingHolesPass(tpl *Template, cenv env.Compiling) (*Template, env.
 
 		if a.IsOptional() == b.IsOptional() {
 			return a.Hole() < b.Hole()
-		} else {
-			if a.IsOptional() {
-				return false
-			}
-			return true
 		}
+		if a.IsOptional() {
+			return false
+		}
+		return true
 	})
 
 	for _, hole := range sortedHoles {
@@ -344,10 +348,9 @@ func resolveAliasPass(tpl *Template, cenv env.Compiling) (*Template, env.Compili
 			if actual == "" {
 				emptyResolv = append(emptyResolv, alias)
 				return "", false
-			} else {
-				cenv.Log().ExtraVerbosef("alias: resolved '%s' to '%s' for key %s", alias, actual, key)
-				return actual, true
 			}
+			cenv.Log().ExtraVerbosef("alias: resolved '%s' to '%s' for key %s", alias, actual, key)
+			return actual, true
 		}
 	}
 
@@ -357,9 +360,9 @@ func resolveAliasPass(tpl *Template, cenv env.Compiling) (*Template, env.Compili
 	case 0:
 		break
 	case 1:
-		return tpl, cenv, fmt.Errorf("cannot resolve alias \"%s\". Not found in locally synced data.", emptyResolv[0])
+		return tpl, cenv, fmt.Errorf("cannot resolve alias \"%s\". Not found in locally synced data", emptyResolv[0])
 	default:
-		return tpl, cenv, fmt.Errorf("cannot resolve aliases: %q. Not found in locally synced data.", emptyResolv)
+		return tpl, cenv, fmt.Errorf("cannot resolve aliases: %q. Not found in locally synced data", emptyResolv)
 
 	}
 

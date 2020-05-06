@@ -94,6 +94,7 @@ func (*noopCompileEnv) Log() *logger.Logger                                   { 
 func (*noopCompileEnv) Push(int, ...map[string]interface{})                   {}
 func (*noopCompileEnv) Get(int) map[string]interface{}                        { return make(map[string]interface{}) }
 
+// NewEnv create a new environment.
 func NewEnv() *envBuilder {
 	b := &envBuilder{new(compileEnv)}
 	b.E.lookupCommandFunc = func(...string) interface{} { return nil }

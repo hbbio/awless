@@ -58,7 +58,7 @@ func NewRunner(tpl *template.Template, msg, tplPath string, fillers ...map[strin
 		return newCommandFunc()
 	}
 
-	runner.BeforeRun = func(tplExec *template.TemplateExecution) (bool, error) {
+	runner.BeforeRun = func(tplExec *template.Execution) (bool, error) {
 		var yesorno string
 		if forceGlobalFlag {
 			yesorno = "y"
@@ -91,7 +91,7 @@ func NewRunner(tpl *template.Template, msg, tplPath string, fillers ...map[strin
 		return false, nil
 	}
 
-	runner.AfterRun = func(tplExec *template.TemplateExecution) error {
+	runner.AfterRun = func(tplExec *template.Execution) error {
 		if tplExec.Message == "" {
 			if tplExec.IsOneLiner() {
 				tplExec.SetMessage(fmt.Sprintf("Run %s", tplExec.Template))

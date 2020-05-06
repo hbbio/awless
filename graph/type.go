@@ -1,19 +1,3 @@
-/*
-Copyright 2017 WALLIX
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
 package graph
 
 import (
@@ -28,8 +12,10 @@ import (
 	tstore "github.com/wallix/triplestore"
 )
 
+// FirewallRules is a slice of firewall rules.
 type FirewallRules []*FirewallRule
 
+// Sort firewall rules.
 func (rules FirewallRules) Sort() {
 	for _, r := range rules {
 		sort.Slice(r.IPRanges, func(i int, j int) bool {
@@ -41,6 +27,7 @@ func (rules FirewallRules) Sort() {
 	})
 }
 
+// FirewallRule describes a single firewall rule.
 type FirewallRule struct {
 	PortRange PortRange    `predicate:"net:portRange"`
 	Protocol  string       `predicate:"net:protocol"`
@@ -48,6 +35,7 @@ type FirewallRule struct {
 	Sources   []string     `predicate:"cloud:source"`
 }
 
+// Contains checks if firewall rule contains `ip`.
 func (r *FirewallRule) Contains(ip string) bool {
 	addr := net.ParseIP(ip)
 	for _, n := range r.IPRanges {
@@ -58,6 +46,7 @@ func (r *FirewallRule) Contains(ip string) bool {
 	return false
 }
 
+// String prints a firewall rule to string.
 func (r *FirewallRule) String() string {
 	return fmt.Sprintf("PortRange:%+v; Protocol:%s; IPRanges:%+v; Sources:%+v", r.PortRange, r.Protocol, r.IPRanges, r.Sources)
 }
@@ -112,22 +101,17 @@ func (r *FirewallRule) unmarshalFromTriples(g tstore.RDFGraph, id string) error 
 	return nil
 }
 
+// PortRange describes a port range.
 type PortRange struct {
 	FromPort, ToPort int64
 	Any              bool
 }
 
+// Contains checks if port range contains given port.
 func (p PortRange) Contains(port int64) bool {
-	if p.Any {
-		return true
-	}
-
-	from, to := p.FromPort, p.ToPort
-	if from == port || to == port || (from < port && to > port) {
-		return true
-	}
-
-	return false
+	return p.Any ||
+		// p.FromPort == port || p.ToPort == port ||
+		(p.FromPort <= port && p.ToPort >= port)
 }
 
 func (p PortRange) String() string {
@@ -351,13 +335,14 @@ func (g *Grant) unmarshalFromTriples(gph tstore.RDFGraph, id string) error {
 	return nil
 }
 
+// KeyValue is a (Key, Value) string pair.
 type KeyValue struct {
-	KeyName string `predicate:"cloud:keyName"`
-	Value   string `predicate:"cloud:value"`
+	Key   string `predicate:"cloud:keyName"`
+	Value string `predicate:"cloud:value"`
 }
 
 func (kv *KeyValue) String() string {
-	return fmt.Sprintf("[Key:%s,Value:%s]", kv.KeyName, kv.Value)
+	return fmt.Sprintf("[Key:%s,Value:%s]", kv.Key, kv.Value)
 }
 
 func (kv *KeyValue) marshalToTriples(id string) []tstore.Triple {
@@ -371,7 +356,7 @@ func (kv *KeyValue) marshalToTriples(id string) []tstore.Triple {
 
 func (kv *KeyValue) unmarshalFromTriples(gph tstore.RDFGraph, id string) error {
 	var err error
-	kv.KeyName, err = extractUniqueLiteralTextFromGraph(gph, id, rdf.KeyName)
+	kv.Key, err = extractUniqueLiteralTextFromGraph(gph, id, rdf.KeyName)
 	if err != nil {
 		return fmt.Errorf("unmarshal keyvalue: key name: %s", err)
 	}

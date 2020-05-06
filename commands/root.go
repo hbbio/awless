@@ -74,10 +74,10 @@ func init() {
 }
 
 var RootCmd = &cobra.Command{
-	Use:   "awless COMMAND",
-	Short: "Manage  and explore your cloud",
-	Long:  "awless is a powerful CLI to explore, sync and manage your cloud infrastructure",
-	BashCompletionFunction: bash_completion_func,
+	Use:                    "awless COMMAND",
+	Short:                  "Manage  and explore your cloud",
+	Long:                   "awless is a powerful CLI to explore, sync and manage your cloud infrastructure",
+	BashCompletionFunction: bashCompletionFunc,
 	RunE: func(c *cobra.Command, args []string) error {
 		if versionGlobalFlag {
 			printVersion(c, args)
@@ -134,7 +134,7 @@ func HasCmdOnelinerChilds(cmd *cobra.Command) bool {
 }
 
 const (
-	bash_completion_func = `
+	bashCompletionFunc = `
 __awless_get_all_ids()
 {
 		local all_ids_output

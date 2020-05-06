@@ -376,7 +376,7 @@ var extractNameValueFn = func(i interface{}) (interface{}, error) {
 	}
 	var nameValues []*graph.KeyValue
 	for _, dimension := range i.([]*cloudwatch.Dimension) {
-		keyval := &graph.KeyValue{KeyName: awssdk.StringValue(dimension.Name), Value: awssdk.StringValue(dimension.Value)}
+		keyval := &graph.KeyValue{Key: awssdk.StringValue(dimension.Name), Value: awssdk.StringValue(dimension.Value)}
 
 		nameValues = append(nameValues, keyval)
 	}
@@ -389,7 +389,7 @@ var extractECSAttributesFn = func(i interface{}) (interface{}, error) {
 	}
 	var keyVals []*graph.KeyValue
 	for _, attribute := range i.([]*ecs.Attribute) {
-		keyval := &graph.KeyValue{KeyName: awssdk.StringValue(attribute.Name), Value: awssdk.StringValue(attribute.Value)}
+		keyval := &graph.KeyValue{Key: awssdk.StringValue(attribute.Name), Value: awssdk.StringValue(attribute.Value)}
 
 		keyVals = append(keyVals, keyval)
 	}
@@ -402,7 +402,7 @@ var extractRouteTableAssociationsFn = func(i interface{}) (interface{}, error) {
 	}
 	var keyVals []*graph.KeyValue
 	for _, assoc := range i.([]*ec2.RouteTableAssociation) {
-		keyval := &graph.KeyValue{KeyName: awssdk.StringValue(assoc.RouteTableAssociationId), Value: awssdk.StringValue(assoc.SubnetId)}
+		keyval := &graph.KeyValue{Key: awssdk.StringValue(assoc.RouteTableAssociationId), Value: awssdk.StringValue(assoc.SubnetId)}
 		keyVals = append(keyVals, keyval)
 	}
 	return keyVals, nil
@@ -614,7 +614,7 @@ var extractStackOutputsFn = func(i interface{}) (interface{}, error) {
 	}
 	var keyVals []*graph.KeyValue
 	for _, out := range i.([]*cloudformation.Output) {
-		keyval := &graph.KeyValue{KeyName: awssdk.StringValue(out.OutputKey), Value: awssdk.StringValue(out.OutputValue)}
+		keyval := &graph.KeyValue{Key: awssdk.StringValue(out.OutputKey), Value: awssdk.StringValue(out.OutputValue)}
 
 		keyVals = append(keyVals, keyval)
 	}
@@ -627,7 +627,7 @@ var extractStackParametersFn = func(i interface{}) (interface{}, error) {
 	}
 	var keyVals []*graph.KeyValue
 	for _, out := range i.([]*cloudformation.Parameter) {
-		keyval := &graph.KeyValue{KeyName: awssdk.StringValue(out.ParameterKey), Value: awssdk.StringValue(out.ParameterValue)}
+		keyval := &graph.KeyValue{Key: awssdk.StringValue(out.ParameterKey), Value: awssdk.StringValue(out.ParameterValue)}
 
 		keyVals = append(keyVals, keyval)
 	}
@@ -640,7 +640,7 @@ var extractContainersImagesFn = func(i interface{}) (interface{}, error) {
 	}
 	var keyVals []*graph.KeyValue
 	for _, out := range i.([]*ecs.ContainerDefinition) {
-		keyval := &graph.KeyValue{KeyName: awssdk.StringValue(out.Name), Value: awssdk.StringValue(out.Image)}
+		keyval := &graph.KeyValue{Key: awssdk.StringValue(out.Name), Value: awssdk.StringValue(out.Image)}
 
 		keyVals = append(keyVals, keyval)
 	}

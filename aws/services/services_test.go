@@ -42,7 +42,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/route53"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/sns"
-	"github.com/hbbio/awless/aws/fetch"
+	awsfetch "github.com/hbbio/awless/aws/fetch"
 	"github.com/hbbio/awless/cloud"
 	p "github.com/hbbio/awless/cloud/properties"
 	"github.com/hbbio/awless/cloud/rdf"
@@ -598,26 +598,26 @@ func TestBuildInfraRdfGraph(t *testing.T) {
 		}
 		if p, ok := res.Properties()[p.ContainersImages].([]*graph.KeyValue); ok {
 			sort.Slice(p, func(i, j int) bool {
-				if p[i].KeyName == p[j].KeyName {
+				if p[i].Key == p[j].Key {
 					return p[i].Value < p[j].Value
 				}
-				return p[i].KeyName < p[j].KeyName
+				return p[i].Key < p[j].Key
 			})
 		}
 		if p, ok := res.Properties()[p.Attributes].([]*graph.KeyValue); ok {
 			sort.Slice(p, func(i, j int) bool {
-				if p[i].KeyName == p[j].KeyName {
+				if p[i].Key == p[j].Key {
 					return p[i].Value < p[j].Value
 				}
-				return p[i].KeyName < p[j].KeyName
+				return p[i].Key < p[j].Key
 			})
 		}
 		if p, ok := res.Properties()[p.Associations].([]*graph.KeyValue); ok {
 			sort.Slice(p, func(i, j int) bool {
-				if p[i].KeyName == p[j].KeyName {
+				if p[i].Key == p[j].Key {
 					return p[i].Value < p[j].Value
 				}
-				return p[i].KeyName < p[j].KeyName
+				return p[i].Key < p[j].Key
 			})
 		}
 		if p, ok := res.Properties()[p.InboundRules].([]*graph.FirewallRule); ok {
@@ -656,7 +656,7 @@ func TestBuildInfraRdfGraph(t *testing.T) {
 		"my_key":                    resourcetest.KeyPair("my_key").Build(),
 		"igw_1":                     resourcetest.InternetGw("igw_1").Prop(p.Vpcs, []string{"vpc_2"}).Build(),
 		"natgw_1":                   resourcetest.NatGw("natgw_1").Prop(p.Vpc, "vpc_1").Prop(p.Subnet, "sub_1").Build(),
-		"rt_1":                      resourcetest.RouteTable("rt_1").Prop(p.Vpc, "vpc_1").Prop(p.Default, true).Prop(p.Associations, []*graph.KeyValue{{KeyName: "assoc_1", Value: "sub_1"}, {KeyName: "assoc_2", Value: "sub_2"}}).Build(),
+		"rt_1":                      resourcetest.RouteTable("rt_1").Prop(p.Vpc, "vpc_1").Prop(p.Default, true).Prop(p.Associations, []*graph.KeyValue{{Key: "assoc_1", Value: "sub_1"}, {Key: "assoc_2", Value: "sub_2"}}).Build(),
 		"lb_1":                      resourcetest.LoadBalancer("lb_1").Prop(p.Arn, "lb_1").Prop(p.Name, "my_loadbalancer").Prop(p.Vpc, "vpc_1").Build(),
 		"lb_2":                      resourcetest.LoadBalancer("lb_2").Prop(p.Arn, "lb_2").Prop(p.Vpc, "vpc_2").Build(),
 		"lb_3":                      resourcetest.LoadBalancer("lb_3").Prop(p.Arn, "lb_3").Prop(p.Vpc, "vpc_1").Build(),
@@ -1068,8 +1068,8 @@ func TestBuildMonitoringGraph(t *testing.T) {
 		}
 		if p, ok := res.Properties()[p.Dimensions].([]*graph.KeyValue); ok {
 			sort.Slice(p, func(i, j int) bool {
-				if p[i].KeyName != p[j].KeyName {
-					return p[i].KeyName < p[j].KeyName
+				if p[i].Key != p[j].Key {
+					return p[i].Key < p[j].Key
 				}
 				return p[i].Value <= p[j].Value
 			})
@@ -1078,13 +1078,13 @@ func TestBuildMonitoringGraph(t *testing.T) {
 
 	expected := map[string]cloud.Resource{
 		"awls-4ba90752": resourcetest.Metric("awls-4ba90752").Prop(p.Name, "metric_1").Prop(p.Namespace, "namespace_1").Build(),
-		"awls-4baa0753": resourcetest.Metric("awls-4baa0753").Prop(p.Name, "metric_2").Prop(p.Namespace, "namespace_1").Prop(p.Dimensions, []*graph.KeyValue{{KeyName: "first", Value: "dimension"}, {KeyName: "second", Value: "dimension"}}).Build(),
+		"awls-4baa0753": resourcetest.Metric("awls-4baa0753").Prop(p.Name, "metric_2").Prop(p.Namespace, "namespace_1").Prop(p.Dimensions, []*graph.KeyValue{{Key: "first", Value: "dimension"}, {Key: "second", Value: "dimension"}}).Build(),
 		"awls-4bb20753": resourcetest.Metric("awls-4bb20753").Prop(p.Name, "metric_1").Prop(p.Namespace, "namespace_2").Build(),
 		"awls-4bb30754": resourcetest.Metric("awls-4bb30754").Prop(p.Name, "metric_2").Prop(p.Namespace, "namespace_2").Build(),
 		"alarm_1":       resourcetest.Alarm("alarm_1").Prop(p.Arn, "alarm_1").Build(),
 		"alarm_2":       resourcetest.Alarm("alarm_2").Prop(p.Arn, "alarm_2").Build(),
 		"alarm_3": resourcetest.Alarm("alarm_3").Prop(p.Arn, "alarm_3").Prop(p.Name, "my_alarm").Prop(p.ActionsEnabled, true).Prop(p.AlarmActions, []string{"action_arn_1", "action_arn_2", "action_arn_3"}).Prop(p.InsufficientDataActions, []string{"action_arn_1", "action_arn_3"}).
-			Prop(p.OKActions, []string{"action_arn_2"}).Prop(p.Description, "my alarm description").Prop(p.Dimensions, []*graph.KeyValue{{KeyName: "first", Value: "dimension"}, {KeyName: "second", Value: "dimension"}}).Prop(p.MetricName, "metric_2").
+			Prop(p.OKActions, []string{"action_arn_2"}).Prop(p.Description, "my alarm description").Prop(p.Dimensions, []*graph.KeyValue{{Key: "first", Value: "dimension"}, {Key: "second", Value: "dimension"}}).Prop(p.MetricName, "metric_2").
 			Prop(p.Namespace, "namespace_2").Prop(p.Updated, now).Prop(p.State, "OK").Build(),
 	}
 
@@ -1263,16 +1263,16 @@ func TestBuildCloudFormationGraph(t *testing.T) {
 		}
 		if p, ok := res.Properties()[p.Parameters].([]*graph.KeyValue); ok {
 			sort.Slice(p, func(i, j int) bool {
-				if p[i].KeyName != p[j].KeyName {
-					return p[i].KeyName < p[j].KeyName
+				if p[i].Key != p[j].Key {
+					return p[i].Key < p[j].Key
 				}
 				return p[i].Value <= p[j].Value
 			})
 		}
 		if p, ok := res.Properties()[p.Outputs].([]*graph.KeyValue); ok {
 			sort.Slice(p, func(i, j int) bool {
-				if p[i].KeyName != p[j].KeyName {
-					return p[i].KeyName < p[j].KeyName
+				if p[i].Key != p[j].Key {
+					return p[i].Key < p[j].Key
 				}
 				return p[i].Value <= p[j].Value
 			})
@@ -1289,8 +1289,8 @@ func TestBuildCloudFormationGraph(t *testing.T) {
 			Prop(p.DisableRollback, true).
 			Prop(p.Modified, now).
 			Prop(p.Notifications, []string{"notif_1", "notif_2"}).
-			Prop(p.Outputs, []*graph.KeyValue{{KeyName: "output1", Value: "myoutput1"}, {KeyName: "output2", Value: "myoutput2"}}).
-			Prop(p.Parameters, []*graph.KeyValue{{KeyName: "key1", Value: "val1"}, {KeyName: "key2", Value: "val2"}}).
+			Prop(p.Outputs, []*graph.KeyValue{{Key: "output1", Value: "myoutput1"}, {Key: "output2", Value: "myoutput2"}}).
+			Prop(p.Parameters, []*graph.KeyValue{{Key: "key1", Value: "val1"}, {Key: "key2", Value: "val2"}}).
 			Prop(p.Role, "role_arn").
 			Prop(p.State, "deployed").
 			Prop(p.StateMessage, "evrything ok").
@@ -1362,7 +1362,7 @@ func TestBuildEmptyRdfGraphWhenNoData(t *testing.T) {
 	compareResources(t, g, resources, expected, expectedChildren, expectedAppliedOn)
 }
 
-func mustGetChildrenId(g cloud.GraphAPI, res cloud.Resource) []string {
+func mustGetChildrenID(g cloud.GraphAPI, res cloud.Resource) []string {
 	var collect []string
 	children, err := g.ResourceRelations(res, rdf.ChildrenOfRel, false)
 	if err != nil {
@@ -1374,7 +1374,7 @@ func mustGetChildrenId(g cloud.GraphAPI, res cloud.Resource) []string {
 	return collect
 }
 
-func mustGetAppliedOnId(g cloud.GraphAPI, res cloud.Resource) []string {
+func mustGetAppliedOnID(g cloud.GraphAPI, res cloud.Resource) []string {
 	var collect []string
 	children, err := g.ResourceRelations(res, rdf.ApplyOn, false)
 	if err != nil {
@@ -1401,12 +1401,12 @@ func compareResources(t *testing.T, g cloud.GraphAPI, resources []cloud.Resource
 			//pretty.Print(want)
 			t.Errorf("got \n%#v\nwant\n%#v", got, want)
 		}
-		children := mustGetChildrenId(g, got)
+		children := mustGetChildrenID(g, got)
 		sort.Strings(children)
 		if g, w := children, expectedChildren[got.Id()]; !reflect.DeepEqual(g, w) {
 			t.Errorf("'%s' children: got %v, want %v", got.Id(), g, w)
 		}
-		appliedOn := mustGetAppliedOnId(g, got)
+		appliedOn := mustGetAppliedOnID(g, got)
 		sort.Strings(appliedOn)
 		if g, w := appliedOn, expectedAppliedOn[got.Id()]; !reflect.DeepEqual(g, w) {
 			t.Errorf("'%s' appliedOn: got %v, want %v", got.Id(), g, w)

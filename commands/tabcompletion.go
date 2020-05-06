@@ -102,7 +102,7 @@ func holeAutoCompletion(g cloud.GraphAPI, paramPaths []string) readline.AutoComp
 					}
 				case []*graph.KeyValue:
 					for _, kv := range prop {
-						possibleSuggests = append(possibleSuggests, fmt.Sprintf("%s:%s", kv.KeyName, kv.Value))
+						possibleSuggests = append(possibleSuggests, fmt.Sprintf("%s:%s", kv.Key, kv.Value))
 					}
 				}
 			}

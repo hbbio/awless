@@ -20,12 +20,12 @@ type Runner struct {
 	Validators                             []Validator
 	ParamsSuggested                        int
 
-	BeforeRun func(*TemplateExecution) (bool, error)
-	AfterRun  func(*TemplateExecution) error
+	BeforeRun func(*Execution) (bool, error)
+	AfterRun  func(*Execution) error
 }
 
 func (ru *Runner) Run() error {
-	tplExec := &TemplateExecution{
+	tplExec := &Execution{
 		Template: ru.Template,
 		Path:     ru.TemplatePath,
 		Locale:   ru.Locale,

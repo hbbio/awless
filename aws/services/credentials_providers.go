@@ -66,9 +66,8 @@ func (f *fileCacheProvider) Retrieve() (credentials.Value, error) {
 		if !cached.isExpired() {
 			f.curr = cached
 			return cached.Value, nil
-		} else {
-			f.creds.Expire()
 		}
+		f.creds.Expire()
 	}
 	credValue, err := f.creds.Get()
 	if err != nil {

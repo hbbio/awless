@@ -12,7 +12,7 @@ import (
 )
 
 func TestTemplateIsOneLiner(t *testing.T) {
-	tplExec := &TemplateExecution{}
+	tplExec := &Execution{}
 	if err := tplExec.UnmarshalJSON([]byte(`{"commands":[{"line":"create vpc"},{"line": "detach policy"}]}`)); err != nil {
 		t.Fatal(err)
 	}
@@ -30,7 +30,7 @@ func TestTemplateIsOneLiner(t *testing.T) {
 func TestSetMessageTruncatingSizeWhenNeeded(t *testing.T) {
 	valid := strings.Repeat("a", 140)
 
-	te := &TemplateExecution{}
+	te := &Execution{}
 	te.SetMessage(valid + "aa")
 	if got, want := te.Message, valid[:len(valid)-3]+"..."; got != want {
 		t.Fatalf("got %s, want %s", got, want)
@@ -41,7 +41,7 @@ func TestSetMessageTruncatingSizeWhenNeeded(t *testing.T) {
 	}
 }
 func TestGetStatsFromTemplateExecution(t *testing.T) {
-	tplExec := &TemplateExecution{}
+	tplExec := &Execution{}
 	if err := tplExec.UnmarshalJSON([]byte(`{
 		"commands": [
 			{"line": "create vpc"},
@@ -85,7 +85,7 @@ func TestGetStatsFromTemplateExecution(t *testing.T) {
 }
 
 func TestTemplateExecutionUnmarshalFromJSON(t *testing.T) {
-	tplExec := &TemplateExecution{}
+	tplExec := &Execution{}
 	err := tplExec.UnmarshalJSON([]byte(`{
 		"source": "create stuff",
 		"locale": "eu-west-2",
@@ -296,7 +296,7 @@ func TestTemplateExecutionMarshalToJSON(t *testing.T) {
 	}
 
 	for _, c := range tcases {
-		tplExec := TemplateExecution{Template: c.templ, Source: c.source, Author: c.author, Locale: c.locale, Profile: c.profile, Message: c.message, Path: c.path, Fillers: c.fillers}
+		tplExec := Execution{Template: c.templ, Source: c.source, Author: c.author, Locale: c.locale, Profile: c.profile, Message: c.message, Path: c.path, Fillers: c.fillers}
 		actual, err := tplExec.MarshalJSON()
 		if err != nil {
 			t.Fatal(err)

@@ -279,7 +279,10 @@ func (ctx *instanceConnectionContext) fetchConnectionInfo() {
 	go func() {
 		var err error
 		defer wg.Done()
-		resourcesGraph, err = awsservices.InfraService.FetchByType(context.WithValue(context.Background(), "force", true), cloud.Instance)
+		resourcesGraph, err = awsservices.InfraService.FetchByType(
+			context.WithValue(context.Background(), "force", true),
+			cloud.Instance,
+		)
 		if err != nil {
 			errc <- err
 		}

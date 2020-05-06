@@ -47,7 +47,7 @@ var revertCmd = &cobra.Command{
 
 		revertID := args[0]
 
-		var loaded *template.TemplateExecution
+		var loaded *template.Execution
 		exitOn(database.Execute(func(db *database.DB) (terr error) {
 			loaded, terr = db.GetTemplate(revertID)
 			return
@@ -66,7 +66,7 @@ var revertCmd = &cobra.Command{
 		reverted, err := loaded.Template.Revert()
 		exitOn(err)
 
-		tplExec := &template.TemplateExecution{
+		tplExec := &template.Execution{
 			Template: reverted,
 			Locale:   config.GetAWSRegion(),
 			Profile:  config.GetAWSProfile(),

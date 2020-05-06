@@ -153,7 +153,7 @@ func (h KeyValuesColumnDefinition) format(i interface{}) string {
 	}
 	var b bytes.Buffer
 	for i, kv := range ii {
-		b.WriteString(fmt.Sprintf("%s:%s", color.CyanString(kv.KeyName), kv.Value))
+		b.WriteString(fmt.Sprintf("%s:%s", color.CyanString(kv.Key), kv.Value))
 		if i < len(ii)-1 {
 			b.WriteString(" ")
 		}

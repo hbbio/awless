@@ -101,7 +101,7 @@ var runCmd = &cobra.Command{
 		extraParams, err := template.ParseParams(strings.Join(args[1:], " "))
 		exitOn(err)
 
-		tplExec := &template.TemplateExecution{
+		tplExec := &template.Execution{
 			Template: templ,
 			Path:     fullPath,
 			Message:  strings.TrimSpace(runLogMessage),
@@ -244,7 +244,7 @@ func createDriverCommands(action string, entities []string) *cobra.Command {
 			templ, err := suggestFixParsingError(templDef, args, matchingProperty, invalidEntityErr)
 			exitOn(err)
 
-			tplExec := &template.TemplateExecution{
+			tplExec := &template.Execution{
 				Template: templ,
 				Locale:   config.GetAWSRegion(),
 				Profile:  config.GetAWSProfile(),
@@ -275,7 +275,7 @@ func createDriverCommands(action string, entities []string) *cobra.Command {
 					exitOn(err)
 				}
 
-				tplExec := &template.TemplateExecution{
+				tplExec := &template.Execution{
 					Template: templ,
 					Locale:   config.GetAWSRegion(),
 					Profile:  config.GetAWSProfile(),
@@ -336,7 +336,7 @@ func createDriverCommands(action string, entities []string) *cobra.Command {
 	return actionCmd
 }
 
-func runSyncFor(tplExec *template.TemplateExecution) {
+func runSyncFor(tplExec *template.Execution) {
 	if !config.GetAutosync() {
 		return
 	}
@@ -417,7 +417,7 @@ func resolveAliasFunc(paramPath, alias string) string {
 
 func availableActionsForEntity(entity string) string {
 	var out []string
-	for actionentity, _ := range awsspec.APIPerTemplateDefName {
+	for actionentity := range awsspec.APIPerTemplateDefName {
 		if strings.HasSuffix(actionentity, entity) {
 			index := strings.Index(actionentity, entity)
 			out = append(out, fmt.Sprintf("  %s %s", actionentity[:index], actionentity[index:]))
@@ -433,15 +433,13 @@ func availableActionsForEntity(entity string) string {
 func oneLinerShortDesc(action string, entities []string) string {
 	if len(entities) > 5 {
 		return fmt.Sprintf("%s, \u2026 (see `awless %s -h` for more)", strings.Join(entities[0:5], ", "), action)
-	} else {
-		return strings.Join(entities, ", ")
 	}
-
+	return strings.Join(entities, ", ")
 }
 
 const (
-	DEFAULT_REPO_PREFIX = "https://raw.githubusercontent.com/wallix/awless-templates/master"
-	FILE_EXT            = ".aws"
+	defaultRepoPrefix = "https://raw.githubusercontent.com/wallix/awless-templates/master"
+	fileExt           = ".aws"
 )
 
 type templateMetadata struct {
@@ -451,8 +449,8 @@ type templateMetadata struct {
 
 func getTemplateText(path string) (content []byte, expanded string, err error) {
 	if strings.HasPrefix(path, "repo:") {
-		path = fmt.Sprintf("%s/%s", DEFAULT_REPO_PREFIX, strings.TrimPrefix(path[5:], "/"))
-		path = fmt.Sprintf("%s%s", strings.TrimSuffix(path, FILE_EXT), FILE_EXT)
+		path = fmt.Sprintf("%s/%s", defaultRepoPrefix, strings.TrimPrefix(path[5:], "/"))
+		path = fmt.Sprintf("%s%s", strings.TrimSuffix(path, fileExt), fileExt)
 	}
 
 	expanded = path
@@ -522,7 +520,7 @@ func detectMinimalVersionInTemplate(content []byte) (string, bool) {
 }
 
 func listRemoteTemplates() error {
-	manifestFile, err := readHttpContent(DEFAULT_REPO_PREFIX + "/manifest.json")
+	manifestFile, err := readHttpContent(defaultRepoPrefix + "/manifest.json")
 	if err != nil {
 		return err
 	}

@@ -345,11 +345,9 @@ func quoteParamIfNeeded(param interface{}) string {
 	input := fmt.Sprint(param)
 	if ast.SimpleStringValue.MatchString(input) {
 		return input
-	} else {
-		if strings.ContainsRune(input, '\'') {
-			return "\"" + input + "\""
-		} else {
-			return "'" + input + "'"
-		}
 	}
+	if strings.ContainsRune(input, '\'') {
+		return "\"" + input + "\""
+	}
+	return "'" + input + "'"
 }

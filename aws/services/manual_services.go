@@ -66,8 +66,9 @@ func ResourceTypesPerServiceName() map[string][]string {
 
 var arnResourceInfoRegex = regexp.MustCompile(`(root)|([\w-.]*)/([\w-./]*)`)
 
+// Identity defines an AWS identity.
 type Identity struct {
-	Account, Arn, UserId, ResourceType, ResourcePath, Resource string
+	Account, Arn, UserID, ResourceType, ResourcePath, Resource string
 }
 
 func (i *Identity) IsRoot() bool {
@@ -87,7 +88,7 @@ func (s *Access) GetIdentity() (*Identity, error) {
 	ident := &Identity{
 		Account: awssdk.StringValue(resp.Account),
 		Arn:     awssdk.StringValue(resp.Arn),
-		UserId:  awssdk.StringValue(resp.UserId),
+		UserID:  awssdk.StringValue(resp.UserId),
 	}
 
 	splits := strings.Split(ident.Arn, ":")

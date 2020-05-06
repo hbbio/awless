@@ -801,7 +801,7 @@ func assertCmdNodeParams(n ast.Node, expected map[string]interface{}) error {
 	for key, expVal := range expected {
 		node, ok := cmd.ParamNodes[key]
 		if !ok {
-			return fmt.Errorf("param '%s' missing in action params.", key)
+			return fmt.Errorf("param '%s' missing in action params", key)
 		}
 		var value interface{}
 		if i, ok := node.(ast.InterfaceNode); ok {
